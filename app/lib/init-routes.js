@@ -16,6 +16,8 @@ function load(app, fn){
   var home = require('../routes/home');
 
   app.get('/', d, home.index);
+  app.get('/artist/:id', d, home.show);
+  app.post('/artist', d, home.create);
   console.log('Routes Loaded');
   fn();
 }
