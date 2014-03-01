@@ -14,7 +14,7 @@ exports.artist = function(req, res){
   res.render('home/artist', {title: 'Artist List', artistID:req.params.id});
 };
 
-exports.create = function(req, res){
+exports.createArtist = function(req, res){
   var artist = new Artist(req.body);
   if (req.files.cover.name === ''){
     artist.addCover(undefined);
@@ -37,6 +37,13 @@ exports.show = function(req, res){
 exports.createSong = function(req, res){
   var song = new Song(req.body);
   song.insert(function(){
+    res.redirect('home/artist/'+req.body.id);
+  });
+};
+
+exports.createAlbum = function(req, res){
+  var album = new Album(req.body);
+  album.insert(function(){
     res.redirect('home/artist/'+req.body.id);
   });
 };
