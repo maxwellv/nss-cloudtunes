@@ -18,7 +18,7 @@ Album.prototype.addCover = function(oldpath){
   var dirname = this.name.replace(/\s/g, '').toLowerCase();
   var abspath = __dirname + '/../static';
   var relpath = '/audios/' + dirname;
-  fs.mkDirSync(abspath + relpath);
+  fs.mkdirSync(abspath + relpath);
 
   var extension = path.extname(oldpath);
   relpath += '/cover' + extension;
