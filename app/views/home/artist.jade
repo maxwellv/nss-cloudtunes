@@ -66,9 +66,9 @@ html(class='no-js', lang='en')
       .small-12.columns
         each album in artist.albums
           .album
-            .cover(style='background-image:url("'+album.cover+'")')
+            .cover(style='background-image:url("'+album.coverImage+'")')
             .name
-            each song in album.songs
+            //each song in album.songs
               //audio(src='/static/audios/'+song.file, controls=true)
     .row
       .small-12.columns
