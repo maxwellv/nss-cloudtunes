@@ -12,9 +12,9 @@ https://trello.com/b/VRHrdYys/cloud-tunes
 If that doesn't work here is a list of things I know we need to do, please
 add to it when you come across something:
 
-Album addSong method
-Album addCover method
-Album insert method
+  Done: Album addSong method
+  Done: Album addCover method
+  Done: Album insert method
 
 Song needs to get artist ID sent to it from addSong form so the 
 redirect will be able to work
