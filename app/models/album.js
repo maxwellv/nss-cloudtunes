@@ -2,6 +2,7 @@
 
 module.exports = Album;
 var albums = global.nss.db.collection('albums');
+//var songs = global.nss.db.collection('songs');
 var Mongo = require('mongodb');
 var fs = require('fs');
 var path = require('path');
@@ -51,3 +52,20 @@ Album.findByName = function(name, fn){
     fn(records);
   });
 };
+/*
+//This returns an array of songs associated with a particular album
+//Grunt doenst like the function in the loop, dont know a way around this
+//ERRORS HERE
+Album.prototype.findSongs = function(fn){
+  var songObjects = [];
+  albums.find({'_id':this._id}, {'songs':1}).toArray(function(err, records){
+    for(var i = 0; i < records.length; i++){
+      songs.findOne({'_id': records[i]._id, function(err, song){
+        songs.push(songObjects);
+      });
+      });
+    }
+    fn(songObjects);
+  });
+};
+*/
