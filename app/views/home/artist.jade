@@ -19,7 +19,7 @@ html(class='no-js', lang='en')
         button#newAlbum.tiny.radius New Album
       .small-6.columns
         button#newSong.tiny.radius New Song
-    .row
+    .row#newAlbumForm.hide
       .small-12.columns
         form(action='/artist', method='post', enctype='multipart/form-data')
           fieldset
@@ -38,7 +38,7 @@ html(class='no-js', lang='en')
               .small-6.columns
                 label &nbsp;
                 button.tiny.radius Add Album
-    .row
+    .row#newSongForm.hide
       .small-12.columns
         form(action='/artist', method='post', enctype='multipart/form-data')
           fieldset
@@ -65,13 +65,12 @@ html(class='no-js', lang='en')
     .row
       .small-12.columns
         each album in artist.albums
-          .album
-            .cover(style='background-image:url("'+album.cover+'")')
-            .name
-            each song in album.songs
-              //audio(src='/static/audios/'+song.file, controls=true)
-    .row
-      .small-12.columns
+          .album#accordion-html5.accordion
+            details
+              summary.name
+                .cover(style='background-image:url("'+album.cover+'")')
+                each song in album.songs
+                  audio(src='/static/audios/'+song.file, controls=true)
 
     script(src='/js/vendor/jquery.js')
     script(src='/js/vendor/foundation.js')

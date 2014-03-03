@@ -16,7 +16,7 @@ html(class='no-js', lang='en')
     .row
       .small-12.columns
         button#newArtist.tiny.radius New Artist
-    .row
+    .row#newArtistForm.hide
       .small-10.columns
         form(action='/artist', method='post', enctype='multipart/form-data')
           fieldset
