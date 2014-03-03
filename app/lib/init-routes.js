@@ -17,7 +17,8 @@ function load(app, fn){
 
   app.get('/', d, home.index);
   app.get('/artist/:id', d, home.show);
-  app.post('/artist', d, home.create);
+  app.post('/artist', d, home.createArtist);
+  app.post('/album', d, home.createAlbum);
   console.log('Routes Loaded');
   fn();
 }

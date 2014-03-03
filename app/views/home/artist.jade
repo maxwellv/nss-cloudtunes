@@ -13,6 +13,9 @@ html(class='no-js', lang='en')
     .row
       .small-12.columns
         h1=title
+    .row
+      .small-4.columns
+        .cover(style='background-image:url("'+artist.coverImage+'")')
         a.button#home.tiny.radius(href='/') Homepage
     .row
       .small-6.columns
@@ -21,13 +24,14 @@ html(class='no-js', lang='en')
         button#newSong.tiny.radius New Song
     .row#newAlbumForm.hide
       .small-12.columns
-        form(action='/artist', method='post', enctype='multipart/form-data')
+        form(action='/album', method='post', enctype='multipart/form-data')
           fieldset
             legend Add Album
             .row
               .small-6.columns
                 label Name
                 input(type='text', name='name')
+                input(type='hidden', name='id', value=artist._id.toString())
               .small-6.columns
                 label Cover Image
                 input(type='file', name='cover')
@@ -40,7 +44,7 @@ html(class='no-js', lang='en')
                 button.tiny.radius Add Album
     .row#newSongForm.hide
       .small-12.columns
-        form(action='/artist', method='post', enctype='multipart/form-data')
+        form(action='/song', method='post', enctype='multipart/form-data')
           fieldset
             legend Add Song
             .row
@@ -58,19 +62,29 @@ html(class='no-js', lang='en')
                 label Album
                 select(name='album', required)
                   each album in artist.albums
-                    option(text=(album.name), value=(album._id))
+                    option(text=album.name, value=album._id)
               .small-4.columns
                 label &nbsp;
                 button.tiny.radius Add Song
     .row
       .small-12.columns
         each album in artist.albums
+<<<<<<< HEAD
           .album#accordion-html5.accordion
             details
               summary.name
                 .cover(style='background-image:url("'+album.cover+'")')
                 each song in album.songs
                   audio(src='/static/audios/'+song.file, controls=true)
+=======
+          .album
+            .cover(style='background-image:url("'+album.coverImage+'")')
+            .name
+            //each song in album.songs
+              //audio(src='/static/audios/'+song.file, controls=true)
+    .row
+      .small-12.columns
+>>>>>>> de06b248ea2c99cba7603c22cbf13325b5cab530
 
     script(src='/js/vendor/jquery.js')
     script(src='/js/vendor/foundation.js')
