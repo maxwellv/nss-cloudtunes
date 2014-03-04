@@ -60,7 +60,11 @@ Artist.findById = function(id, fn){
 
 //function returns all the album objects in an array for the given artist
 Artist.prototype.findAlbums = function (fn){
-  albums.find({'_id': { $in: this.albums}}).toArray(function(err, records){
+  var albumObjectIds = [];
+  for (var x = 0;x < this.albums.length;x++){
+    albumObjectIds.push(new Mongo.ObjectID(this.albums[x]));
+  }
+  albums.find({'_id': { $in: albumObjectIds}}).toArray(function(err, records){
     fn(records);
   });
 };

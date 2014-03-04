@@ -35,6 +35,8 @@ exports.show = function(req, res){
   Artist.findById(Id, function(artist){
     _.extend(artist, Artist.prototype);
     artist.findAlbums(function(albums){
+      console.log('ARTIST ALBUMS:');
+      console.log(albums);
       var firstAlbum = albums[0];
       _.extend(firstAlbum, Album.prototype);
       //test with one album
