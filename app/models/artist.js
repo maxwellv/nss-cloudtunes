@@ -2,6 +2,7 @@
 
 module.exports = Artist;
 var artists = global.nss.db.collection('artists');
+var albums = global.nss.db.collection('albums');
 var Mongo = require('mongodb');
 var fs = require('fs');
 var path = require('path');
@@ -56,3 +57,10 @@ Artist.findById = function(id, fn){
   });
 };
 
+
+//function returns all the album objects in an array for the given artist
+Artist.prototype.findAlbums = function (fn){
+  albums.find({'_id': { $in: this.albums}}).toArray(function(err, records){
+    fn(records);
+  });
+};
