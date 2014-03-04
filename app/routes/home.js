@@ -4,6 +4,7 @@ var Mongo = require('mongodb');
 var Artist = require('../models/artist');
 var Song = require('../models/song');
 var Album = require('../models/album');
+var _ = require('lodash');
 
 exports.index = function(req, res){
   Artist.findAll(function(artists){
@@ -32,9 +33,12 @@ exports.createArtist = function(req, res){
 exports.show = function(req, res){
   var Id = req.params.id.toString();
   Artist.findById(Id, function(artist){
+    _.extend(artist, Artist.prototype);
     artist.findAlbums(function(albums){
+      var firstAlbum = albums[0];
+      _.extend(firstAlbum, Album.prototype);
       //test with one album
-      albums[0].findSongs(function(songs){
+      firstAlbum.findSongs(function(songs){
         res.render('home/artist', {title: artist.name, artist: artist, albums: albums, songs: songs});
       });
     });
