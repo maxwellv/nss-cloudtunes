@@ -22,3 +22,8 @@ redirect will be able to work
 Work on Css
 Accordion to display songs
 
+
+
+3-3-2014
+Need to be able to loop through array of Ids (such as ids in album.songs, or aratist.albumns) and return what 
+is needed.
