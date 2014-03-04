@@ -1,5 +1,6 @@
 'use strict';
 
+var Mongo = require('mongodb');
 var Artist = require('../models/artist');
 var Song = require('../models/song');
 var Album = require('../models/album');
@@ -31,6 +32,7 @@ exports.createArtist = function(req, res){
 exports.show = function(req, res){
   var Id = req.params.id.toString();
   Artist.findById(Id, function(record){
+    console.log('ALBUMS BEING PASSED INTO JADE:', record.albums);
     res.render('home/artist', {title: record.name, artist: record});
   });
 };
@@ -44,8 +46,22 @@ exports.createSong = function(req, res){
 
 exports.createAlbum = function(req, res){
   var album = new Album(req.body);
+  var artistId = Mongo.ObjectID(req.body.id);
   album.addCover(req.files.cover.path);
-  album.insert(function(){
-    res.redirect('artist/'+req.body.id);
+  album.insert(function(err, record){
+    record = record[0];
+    Album.findByName(record.name, function(foundAlbum){
+      Artist.findById(artistId, function(foundArtist){
+        foundArtist = new Artist(foundArtist);
+        if (foundArtist.albums[0] === 'placeholder'){
+          foundArtist.albums = [foundAlbum._id.toString()];
+        } else {
+          foundArtist.albums.push(foundAlbum._id.toString());
+        }
+        foundArtist.update(function(){
+          res.redirect('artist/'+req.body.id);
+        });
+      });
+    });
   });
 };

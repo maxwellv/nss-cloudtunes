@@ -41,7 +41,13 @@ Album.findAll = function(fn){
 
 Album.findById = function(id, fn){
   var _id = Mongo.ObjectID(id.toString());
-  albums.findOne({_id:_id}, function(err, artist){
-    fn(artist);
+  albums.findOne({_id:_id}, function(err, records){
+    fn(records);
+  });
+};
+
+Album.findByName = function(name, fn){
+  albums.findOne({name:name}, function(err, records){
+    fn(records);
   });
 };

@@ -37,6 +37,12 @@ Artist.prototype.insert = function(fn){
   });
 };
 
+Artist.prototype.update = function(fn){
+  artists.update({_id:this._id}, this, function(err, record){
+    fn(err, record);
+  });
+};
+
 Artist.findAll = function(fn){
   artists.find().toArray(function(err, records){
     fn(records);

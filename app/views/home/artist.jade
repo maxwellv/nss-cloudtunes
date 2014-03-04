@@ -68,18 +68,23 @@ html(class='no-js', lang='en')
                 button.tiny.radius Add Song
     .row
       .small-12.columns
-        each album in artist.albums
-          .album#accordion-html5.accordion
-            details
-              summary.name
-                .cover(style='background-image:url("'+album.cover+'")')
-                each song in album.songs
-                  audio(src='/static/audios/'+song.file, controls=true)
-          .album
-            .cover(style='background-image:url("'+album.coverImage+'")')
-            .name
-            //each song in album.songs
-              //audio(src='/static/audios/'+song.file, controls=true)
+        if artist.albums[0] !== "placeholder"
+          each album in artist.albums
+            .album#accordion-html5.accordion
+              details
+                summary.name
+                  .cover(style='background-image:url("'+album.cover+'")')
+                  //TODO: make some alternate way of passing albums into this file
+                  //the problem is, right now albums are coming in as their ObjectID, not the album object
+                  //so we can't reference the album's songs here
+                  //if album.songs[0] !== "placeholder"
+                    //each song in album.songs
+                      //audio(src='/static/audios/'+song.file, controls=true)
+            .album
+              .cover(style='background-image:url("'+album.coverImage+'")')
+              .name
+              //each song in album.songs
+                //audio(src='/static/audios/'+song.file, controls=true)
     .row
       .small-12.columns
 
