@@ -31,9 +31,13 @@ exports.createArtist = function(req, res){
 
 exports.show = function(req, res){
   var Id = req.params.id.toString();
-  Artist.findById(Id, function(record){
-    console.log('ALBUMS BEING PASSED INTO JADE:', record.albums);
-    res.render('home/artist', {title: record.name, artist: record});
+  Artist.findById(Id, function(artist){
+    artist.findAlbums(function(albums){
+      //test with one album
+      albums[0].findSongs(function(songs){
+        res.render('home/artist', {title: artist.name, artist: artist, albums: albums, songs: songs});
+      });
+    });
   });
 };
 

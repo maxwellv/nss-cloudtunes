@@ -60,6 +60,9 @@ Album.prototype.findSongs = function (fn){
   });
 };
 
+
+
+
 /*
 //This returns an array of songs associated with a particular album
 //Grunt doenst like the function in the loop, dont know a way around this
